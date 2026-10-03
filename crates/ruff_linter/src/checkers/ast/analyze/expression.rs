@@ -1105,7 +1105,6 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
                 Rule::OsPathJoin,
                 Rule::OsPathSplitext,
                 Rule::PyPath,
-                Rule::Glob,
                 Rule::OsListdir,
             ]) {
                 flake8_use_pathlib::rules::replaceable_by_pathlib(checker, call);
@@ -1189,6 +1188,9 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
                 }
                 if checker.is_rule_enabled(Rule::OsSymlink) {
                     flake8_use_pathlib::rules::os_symlink(checker, call, segments);
+                }
+                if checker.is_rule_enabled(Rule::Glob) {
+                    flake8_use_pathlib::rules::glob(checker, call, segments);
                 }
                 if checker.is_rule_enabled(Rule::BuiltinOpen) {
                     flake8_use_pathlib::rules::builtin_open(checker, call, segments);

@@ -9,7 +9,7 @@ use crate::rules::flake8_use_pathlib::helpers::{
 };
 use crate::rules::flake8_use_pathlib::{
     rules::Glob,
-    violations::{Joiner, OsListdir, OsPathJoin, OsPathSplitext, PyPath},
+    violations::{Joiner, OsListdir, OsPathJoin, PyPath},
 };
 use crate::{Edit, Fix};
 
@@ -33,10 +33,6 @@ pub(crate) fn replaceable_by_pathlib(checker: &Checker, call: &ExprCall) {
                 },
                 range,
             );
-        }
-        // PTH122
-        ["os", "path", "splitext"] => {
-            checker.report_diagnostic_if_enabled(OsPathSplitext, range);
         }
         // PTH124
         ["py", "path", "local"] => {

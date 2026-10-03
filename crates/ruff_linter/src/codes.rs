@@ -1105,7 +1105,7 @@ pub fn code_to_rule(linter: Linter, code: &str) -> Option<(RuleStatus, Rule)> {
         (Flake8UsePathlib, "119") => rules::flake8_use_pathlib::rules::OsPathBasename,
         (Flake8UsePathlib, "120") => rules::flake8_use_pathlib::rules::OsPathDirname,
         (Flake8UsePathlib, "121") => rules::flake8_use_pathlib::rules::OsPathSamefile,
-        (Flake8UsePathlib, "122") => rules::flake8_use_pathlib::violations::OsPathSplitext,
+        (Flake8UsePathlib, "122") => rules::flake8_use_pathlib::rules::OsPathSplitext,
         (Flake8UsePathlib, "123") => rules::flake8_use_pathlib::rules::BuiltinOpen,
         (Flake8UsePathlib, "124") => rules::flake8_use_pathlib::violations::PyPath,
         (Flake8UsePathlib, "201") => rules::flake8_use_pathlib::rules::PathConstructorCurrentDirectory,

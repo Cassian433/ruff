@@ -1103,7 +1103,6 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
             }
             if checker.any_rule_enabled(&[
                 Rule::OsPathJoin,
-                Rule::OsPathSplitext,
                 Rule::PyPath,
                 Rule::Glob,
                 Rule::OsListdir,
@@ -1177,6 +1176,9 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
                 }
                 if checker.is_rule_enabled(Rule::OsPathSamefile) {
                     flake8_use_pathlib::rules::os_path_samefile(checker, call, segments);
+                }
+                if checker.is_rule_enabled(Rule::OsPathSplitext) {
+                    flake8_use_pathlib::rules::os_path_splitext(checker, call, segments);
                 }
                 if checker.is_rule_enabled(Rule::OsMkdir) {
                     flake8_use_pathlib::rules::os_mkdir(checker, call, segments);

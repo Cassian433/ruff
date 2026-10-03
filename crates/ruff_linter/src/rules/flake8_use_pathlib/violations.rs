@@ -67,62 +67,6 @@ pub(crate) enum Joiner {
 }
 
 /// ## What it does
-/// Checks for uses of `os.path.splitext`.
-///
-/// ## Why is this bad?
-/// `pathlib` offers a high-level API for path manipulation, as compared to
-/// the lower-level API offered by `os.path`. When possible, using `Path` object
-/// methods such as `Path.suffix` and `Path.stem` can improve readability over
-/// the `os.path` module's counterparts (e.g., `os.path.splitext()`).
-///
-/// `os.path.splitext()` specifically returns a tuple of the file root and
-/// extension (e.g., given `splitext('/foo/bar.py')`, `os.path.splitext()`
-/// returns `("foo/bar", ".py")`. These outputs can be reconstructed through a
-/// combination of `Path.suffix` (`".py"`), `Path.stem` (`"bar"`), and
-/// `Path.parent` (`"foo"`).
-///
-/// ## Examples
-/// ```python
-/// import os
-///
-/// (root, ext) = os.path.splitext("foo/bar.py")
-/// ```
-///
-/// Use instead:
-/// ```python
-/// from pathlib import Path
-///
-/// path = Path("foo/bar.py")
-/// root = path.parent / path.stem
-/// ext = path.suffix
-/// ```
-///
-/// ## Known issues
-/// While using `pathlib` can improve the readability and type safety of your code,
-/// it can be less performant than the lower-level alternatives that work directly with strings,
-/// especially on older versions of Python.
-///
-/// ## References
-/// - [Python documentation: `Path.suffix`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.suffix)
-/// - [Python documentation: `Path.suffixes`](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.suffixes)
-/// - [Python documentation: `os.path.splitext`](https://docs.python.org/3/library/os.path.html#os.path.splitext)
-/// - [PEP 428 – The pathlib module – object-oriented filesystem paths](https://peps.python.org/pep-0428/)
-/// - [Correspondence between `os` and `pathlib`](https://docs.python.org/3/library/pathlib.html#corresponding-tools)
-/// - [Why you should be using pathlib](https://treyhunner.com/2018/12/why-you-should-be-using-pathlib/)
-/// - [No really, pathlib is great](https://treyhunner.com/2019/01/no-really-pathlib-is-great/)
-#[derive(ViolationMetadata)]
-#[violation_metadata(stable_since = "v0.0.231", category = Category::Pedantic)]
-pub(crate) struct OsPathSplitext;
-
-impl Violation for OsPathSplitext {
-    #[derive_message_formats]
-    fn message(&self) -> String {
-        "`os.path.splitext()` should be replaced by `Path.suffix`, `Path.stem`, and `Path.parent`"
-            .to_string()
-    }
-}
-
-/// ## What it does
 /// Checks for uses of the `py.path` library.
 ///
 /// ## Why is this bad?
